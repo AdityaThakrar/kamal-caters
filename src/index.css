@@ -1,0 +1,66 @@
+@import 'tailwindcss';
+@import 'react-day-picker/style.css';
+
+@theme {
+  --font-sans: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+}
+
+/* react-day-picker: replace default blue accent with Deli emerald (DayPicker keeps .rdp-* hooks). */
+.catering-calendar.rdp-root {
+  --rdp-accent-color: #047857;
+  --rdp-accent-background-color: #ecfdf5;
+  --rdp-selected-border: 2px solid transparent;
+  /* Do not accent "today" — booking lead time makes it usually disabled anyway. */
+  --rdp-today-color: inherit;
+}
+
+.catering-calendar.rdp-root .rdp-chevron {
+  fill: currentColor;
+}
+
+/* Strip default "today" emphasis (no circle, no bold, same base as any other day). */
+.catering-calendar.rdp-root .rdp-today {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+.catering-calendar.rdp-root .rdp-today:not(.rdp-selected) > .rdp-day_button {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* Disabled / past days (including today under 24h lead): one flat, faded look — no hover fill. */
+.catering-calendar.rdp-root .rdp-disabled:not(.rdp-selected) > .rdp-day_button,
+.catering-calendar.rdp-root .rdp-disabled:not(.rdp-selected) > .rdp-day_button:hover,
+.catering-calendar.rdp-root .rdp-disabled:not(.rdp-selected) > .rdp-day_button:focus-visible {
+  background-color: transparent !important;
+  color: #d6d3d1 !important;
+}
+
+.catering-calendar.rdp-root .rdp-selected > .rdp-day_button {
+  background-color: #064e3b;
+  color: #fff;
+}
+
+.catering-calendar.rdp-root .rdp-selected > .rdp-day_button:hover:not(:disabled) {
+  background-color: #064e3b;
+  color: #fff;
+}
+
+.catering-calendar.rdp-root .rdp-selected > .rdp-day_button:focus-visible {
+  background-color: #064e3b;
+  color: #fff;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100svh;
+  overflow: visible;
+}

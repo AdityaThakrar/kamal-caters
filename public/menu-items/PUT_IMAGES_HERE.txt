@@ -1,0 +1,85 @@
+Drop your square menu images in this folder.
+
+Easy mode — match the menu item id as the filename (Boxed Lunches):
+
+  boxed-pilgrims-progress.png
+  boxed-dub-club.png
+  boxed-farmers-market.png
+  boxed-del-monte-special.png
+  boxed-reo-speedwagon.png
+  boxed-ciao-down.png
+  boxed-california-crunch.png
+  boxed-pot-belly.png
+  boxed-turkey-pesto.png
+  boxed-cleopatra-wrap.png
+  boxed-hail-caesar-wrap.png
+  boxed-abbotts-habit.png
+  boxed-chicken-durango.png
+  boxed-chicken-pesto.png
+  boxed-erik-berger.png
+  boxed-eriks-reuben.png
+  boxed-italian-job.png
+  boxed-raging-bull.png
+  boxed-rio-grande-club.png
+  boxed-sea-dog.png
+  boxed-sweet-liberty.png
+
+Catering packages (same folder, match id):
+
+  tray-just-sandwiches.png
+  tray-deluxe-sandwiches-character.png
+
+Entree salads:
+
+  salad-chicken-gorgonzola.png
+  salad-mandarin-tree.png
+  salad-house-entree.png
+  salad-baja-fiesta.png
+  salad-caesar-entree.png
+
+Salad bowls (catering — "Catering Salads (Serves 12)" category):
+
+  bowl-catering-house.png
+  bowl-catering-caesar.png
+  bowl-catering-baja-fiesta.png
+  bowl-catering-chicken-gorgonzola.png
+  bowl-catering-mandarin-tree.png
+
+Sides:
+
+  side-pasta-salad.png
+  side-macaroni-salad.png
+  side-potato-salad.png
+  side-potato-chips.png
+  side-bbq-chips.png
+  side-jalapeno-chips.png
+  side-salt-vinegar-chips.png
+  side-sun-chips.png
+
+Desserts:
+
+  dessert-assorted-sweets.png
+  dessert-sandy-chocolate-cookie.png
+  dessert-salted-caramel-manifesto-cookie.png
+  dessert-chewy-marshmallow-manifesto-bar.png
+  dessert-peruvian-chocolate-manifesto-brownie.png
+  dessert-carrot-cake.png
+
+Beverages:
+
+  bev-bottled-water.png
+  bev-sparkling-water.png
+  bev-canned-diet-coke.png
+  bev-canned-coke.png
+  bev-canned-sprite.png
+  bev-coke-zero.png
+  bev-arizona-arnold-palmer.png
+
+Then add imageSrc to each row in src/data/menuItems.ts, e.g. imageSrc: '/menu-items/boxed-dub-club.png'
+—or ask the chat to “wire menu images” after files are in place.
+
+Other category ids: see src/data/menuItems.ts (Entree Salads, Sides, etc.).
+
+Or use any names you like and send a short list: filename → item name.
+
+Supported: .png .jpg .webp .svg
