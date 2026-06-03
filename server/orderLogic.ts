@@ -1,4 +1,10 @@
-export function validateOrder(order: any): { valid: boolean; error?: string } {
+export interface Order {
+  id: number
+  item: string
+  quantity?: number
+}
+
+export function validateOrder(order: Partial<Order>): { valid: boolean; error?: string } {
   if (!order || !order.item) {
     return { valid: false, error: 'Order must include an item' }
   }
