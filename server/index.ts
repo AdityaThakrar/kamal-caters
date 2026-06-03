@@ -1,12 +1,13 @@
 import express from 'express'
 import cors from 'cors'
-import { validateOrder } from './orderLogic'
+import { validateOrder, Order } from './orderLogic'
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 
-const orders: any[] = []
+const orders: Order[] = []
+let nextOrderId = 1
 
 app.get('/api/menu', (req, res) => {
   res.json([{ id: 1, name: 'Turkey Sandwich', price: 12 }])
@@ -17,10 +18,9 @@ app.post('/api/orders', (req, res) => {
   if (!check.valid) {
     return res.status(400).json({ error: check.error })
   }
-  const order = req.body
-  order.id = orders.length + 1
-  orders.push(order)
-  res.status(201).json(order)
+  const newOrder: Order = { ...req.body, id: nextOrderId++ }
+  orders.push(newOrder)
+  res.status(201).json(newOrder)
 })
 
 app.get('/api/orders', (req, res) => {
@@ -29,6 +29,9 @@ app.get('/api/orders', (req, res) => {
 
 app.get('/api/location/:zip', async (req, res) => {
   const zip = req.params.zip
+  if (!/^\d{5}$/.test(zip)) {
+    return res.status(400).json({ error: 'Invalid zip code format' })
+  }
   try {
     const response = await fetch(`https://api.zippopotam.us/us/${zip}`)
     if (!response.ok) {
@@ -39,32 +42,6 @@ app.get('/api/location/:zip', async (req, res) => {
     res.json({ zip, city: place['place name'], state: place['state abbreviation'] })
   } catch (err) {
     res.status(500).json({ error: 'Failed to look up location' })
-  }
-})
-
-// Simulates calling an LLM to suggest menu items
-function fakeLLMResponse(cuisine: string, budget: number): string {
-  // A real LLM would return text; we return a JSON string to mimic that
-  return JSON.stringify([
-    { name: `${cuisine} Sampler Platter`, price: budget - 2 },
-    { name: `${cuisine} House Special`, price: budget - 4 },
-    { name: `${cuisine} Side & Drink`, price: budget - 8 },
-  ])
-}
-
-app.post('/api/suggest-menu', (req, res) => {
-  const { cuisine, budget } = req.body
-  if (!cuisine || !budget) {
-    return res.status(400).json({ error: 'Must include cuisine and budget' })
-  }
-
-  const rawText = fakeLLMResponse(cuisine, budget)
-
-  try {
-    const suggestions = JSON.parse(rawText)
-    res.json({ cuisine, budget, suggestions })
-  } catch (err) {
-    res.status(500).json({ error: 'LLM returned malformed data' })
   }
 })
 
